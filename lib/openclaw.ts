@@ -58,7 +58,7 @@ export function parseReadmeToCategories(readme: string): Category[] {
   let current: Category | null = null;
   let inTable = false;
 
-  for (let line of lines) {
+  for (const line of lines) {
     const h2 = line.match(/^##\s+(.+?)\s*$/);
     if (h2) {
       current = { name: h2[1].trim(), items: [] };
@@ -82,7 +82,10 @@ export function parseReadmeToCategories(readme: string): Category[] {
     }
 
     if (inTable && line.trim().startsWith("|")) {
-      const cols = line.split("|").slice(1, -1).map((c) => c.trim());
+      const cols = line
+        .split("|")
+        .slice(1, -1)
+        .map((c) => c.trim());
       if (cols.length < 2) continue;
 
       const link = cols[0].match(/\[([^\]]+)\]\(([^)]+)\)/);

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useMemo, useState } from "react";
@@ -16,9 +15,7 @@ export default function ClientSearch({ categories }: { categories: Category[] })
       .map((cat) => ({
         ...cat,
         items: cat.items.filter((it) =>
-          (it.title + " " + it.description + " " + cat.name)
-            .toLowerCase()
-            .includes(query)
+          (it.title + " " + it.description + " " + cat.name).toLowerCase().includes(query)
         )
       }))
       .filter((cat) => cat.items.length > 0);
@@ -44,9 +41,7 @@ export default function ClientSearch({ categories }: { categories: Category[] })
               >
                 <Link href={`/usecase/${it.slug}`} className="block">
                   <h3 className="font-medium">{it.title}</h3>
-                  <p className="mt-2 text-sm text-zinc-400 line-clamp-3">
-                    {it.description}
-                  </p>
+                  <p className="mt-2 text-sm text-zinc-400 line-clamp-3">{it.description}</p>
                 </Link>
                 <a
                   href={toGithubUrl(it.url)}

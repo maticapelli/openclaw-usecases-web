@@ -1,5 +1,5 @@
-
 import type { Metadata } from "next";
+import Link from "next/link";
 import { getUseCaseIndex } from "@/lib/index";
 import { toGithubUrl, toRawUrl } from "@/lib/openclaw";
 import ReactMarkdown from "react-markdown";
@@ -33,11 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function UseCasePage({
-  params
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function UseCasePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const idx = await getUseCaseIndex();
   const entry = idx[slug];
@@ -64,7 +60,9 @@ export default async function UseCasePage({
   return (
     <main className="min-h-screen px-6 py-10">
       <div className="mx-auto max-w-3xl">
-        <a href="/" className="text-sm underline">← Back</a>
+        <Link href="/" className="text-sm underline">
+          ← Back
+        </Link>
         <h1 className="mt-4 text-2xl font-semibold">{entry.title}</h1>
         <p className="mt-2 text-sm text-zinc-400">{entry.category}</p>
         <a
@@ -80,7 +78,12 @@ export default async function UseCasePage({
           <div className="mt-8 rounded-xl border border-zinc-800 bg-zinc-900 p-4 text-sm text-zinc-300">
             No pudimos cargar el contenido markdown en este momento.
             <div className="mt-3">
-              <a href={toGithubUrl(entry.url)} target="_blank" rel="noreferrer" className="underline">
+              <a
+                href={toGithubUrl(entry.url)}
+                target="_blank"
+                rel="noreferrer"
+                className="underline"
+              >
                 Abrir archivo en GitHub
               </a>
             </div>
